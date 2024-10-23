@@ -1,4 +1,3 @@
-# learning-style-quiz<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="he">
 <head>
@@ -17,7 +16,7 @@
 <body>
     <h1>בחן את סגנון הלמידה שלך</h1>
 
-    <form id="learning-style-quiz" onsubmit="showResult(event)">
+    <form id="learning-style-quiz">
         <div class="question active" id="question1">
             <h2>כיצד אתה מעדיף לקבל מידע חדש?</h2>
             <input type="radio" id="visual" name="learning-style" value="visual">
@@ -78,48 +77,50 @@
         </div>
     </form>
 
+    <div id="result"></div>
+
     <script>
         function nextQuestion(currentQuestion) {
+            // Hide current question
             document.getElementById('question' + currentQuestion).classList.remove('active');
+            // Show next question
             document.getElementById('question' + (currentQuestion + 1)).classList.add('active');
         }
 
-        function showResult(event) {
+        document.getElementById("learning-style-quiz").addEventListener("submit", function(event){
             event.preventDefault();
-            let result = "הנה התיאור הסיפורי שלך:\n\n";
+            let result = "הנה התיאור של סגנון הלמידה שלך:\n\n";
             const learningStyle = document.querySelector('input[name="learning-style"]:checked').value;
             const learningApproach = document.querySelector('input[name="learning-approach"]:checked').value;
             const engagement = document.querySelector('input[name="learning-engagement"]:checked').value;
             const digitalSkills = document.querySelector('input[name="digital-skills"]:checked').value;
             const contentPreference = document.querySelector('input[name="content-preference"]:checked').value;
 
-            // תיאור סיפורי לפי תשובות
-            result += "נראה שאתה לומד בצורה ";
+            // סגנון למידה
             if (learningStyle === "visual") {
-                result += "חזותית, ומעדיף דימויים ויזואליים כמו גרפים, תמונות ומפות, המסייעים לך להבין את המידע בצורה הטובה ביותר.\n";
+                result += "אתה לומד בצורה הטובה ביותר דרך דימויים חזותיים כמו גרפים, מפות, ואינפוגרפיקות. ";
             } else if (learningStyle === "auditory") {
-                result += "שמיעתית, כאשר הרצאות מוקלטות ופודקאסטים הם הדרך המועדפת עליך לקלוט מידע.\n";
+                result += "אתה לומד טוב ביותר דרך שמיעה, כמו בהרצאות מוקלטות או פודקאסטים. ";
             } else if (learningStyle === "kinesthetic") {
-                result += "קינסטטית, ואתה נהנה מהתנסות פיזית ותרגולים מעשיים, מה שמסייע לך להפנים את החומר בצורה עמוקה יותר.\n";
+                result += "אתה נוטה ללמוד דרך התנסות ותנועה. ניסויים ופעילויות פיזיות עוזרות לך להבין את החומר בצורה הטובה ביותר. ";
             } else if (learningStyle === "textual") {
-                result += "טקסטואלית, ואתה מעדיף לקרוא ולכתוב סיכומים כדי להבין את החומר לעומקו.\n";
+                result += "אתה מעדיף לקרוא ולכתוב כדי ללמוד. קריאת טקסטים וכתיבת סיכומים הם הכלים הטובים ביותר עבורך. ";
             }
 
-            result += "בנוגע לגישה ללמידה שלך, ";
+            // גישה ללמידה
             if (learningApproach === "independent") {
-                result += "אתה עצמאי ואוהב ללמוד לבד בקצב שלך, כאשר אין דבר שמפריע לך יותר משיתוף פעולה מוגזם.\n";
+                result += "אתה מעדיף ללמוד לבד בקצב שלך, ולעיתים אתה מוצא שלמידה בקבוצה אינה מתאימה לך כמו למידה עצמאית. ";
             } else if (learningApproach === "social") {
-                result += "אתה חברתי, ומאמין שלמידה בשיתוף פעולה עם אחרים תורמת להבנה שלך, תוך שאתה נהנה מחלוקת רעיונות ודעות.\n";
+                result += "אתה נהנה מלמידה בשיתוף פעולה עם אחרים, ומאמין שדיונים ושיתוף פעולה הם חלק בלתי נפרד מהתהליך הלימודי שלך. ";
             } else if (learningApproach === "goal-oriented") {
-                result += "אתה מונחה מטרה, וללא מטרה ברורה ומשימות מוגדרות, אתה עלול להרגיש חסר כיוון.\n";
+                result += "אתה לומד בצורה הטובה ביותר כאשר יש לך מטרות ברורות ומשימות מוגדרות שאתה יכול לעבוד עליהן באופן שיטתי. ";
             } else if (learningApproach === "curious") {
-                result += "אתה לומד מתוך סקרנות טבעית, ומרגיש שהשאלות שאתה שואל הן מה שמניע את התהליך הלימודי שלך.\n";
+                result += "אתה לומד מתוך סקרנות פנימית, ורוצה לחקור נושאים מגוונים ולשאול שאלות כדי להבין לעומק. ";
             }
 
-            result += "בכל הנוגע למעורבות, ";
+            // רמת מעורבות
             if (engagement === "active") {
-                result += "אתה לומד בצורה פעילה, אוהב להשתתף בדיונים ולתרום מניסיונך ודעותיך.\n";
+                result += "אתה מעורב מאוד בלמידה שלך, תמיד תורם לדיונים ומביא את הדעות שלך לתוך השיח. ";
             } else if (engagement === "passive") {
-                result += "אתה נוטה להיות פסיבי בלמידה, מעדיף להקשיב ולהפנים ולא לקחת חלק פעיל בדיון.\n";
-            } else if (engagement === "high
-
+                result += "אתה נוטה להקשיב יותר ולצפות, ומעדיף לא להשתתף באופן פעיל בשיעורים. ";
+            } else if
