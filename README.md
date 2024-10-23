@@ -79,8 +79,10 @@
 
     <script>
         function nextQuestion(currentQuestion) {
-            document.getElementById('question' + currentQuestion).classList.remove('active');
-            document.getElementById('question' + (currentQuestion + 1)).classList.add('active');
+            // הסתר את השאלה הנוכחית
+            document.getElementById('question' + currentQuestion).style.display = 'none';
+            // הצג את השאלה הבאה
+            document.getElementById('question' + (currentQuestion + 1)).style.display = 'block';
         }
 
         function showResult(event) {
@@ -139,16 +141,7 @@
                     } else if (engagement.value === "low-interest") {
                         result += "בעלת עניין נמוך, ";
                     }
-                });
-                result += "\n";
-            }
+               
 
-            if (digitalSkills.length > 0) {
-                result += "היכולות הדיגיטליות שלך הן: ";
-                digitalSkills.forEach(skill => {
-                    if (skill.value === "advanced") {
-                        result += "מתקדמות, ";
-                    } else if (skill.value === "traditional") {
-                       
 
 
